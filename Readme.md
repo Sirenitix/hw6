@@ -4,10 +4,14 @@ It's Book shopping Web Application.
 App allows users to check for various Books.The project consists of list of Books displayed in various models and designs.
 	
 ## Technologies
-* Spring boot 
+* Spring Boot 
+* Spring Data
+* Hibernate
 * Lombok
-* H2
+* PostgreSQL
 * Thymeleaf
+* jQuery
+* Liquibase
 	
 ## Setup
 For Windows(run.cmd):
