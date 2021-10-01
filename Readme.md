@@ -6,13 +6,13 @@ App allows users to check for various Books.The project consists of list of Book
 ## Technologies
 * Spring Boot 
 * Spring Data
-* RESTful API
 * Hibernate
 * Lombok
 * PostgreSQL
 * Thymeleaf
 * jQuery
 * Liquibase
+* RESTful API
 	
 ## Setup
 For Windows(run.cmd):
