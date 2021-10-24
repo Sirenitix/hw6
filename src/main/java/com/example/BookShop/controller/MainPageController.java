@@ -6,26 +6,21 @@ import com.example.BookShop.dao.SearchWordDto;
 import com.example.BookShop.dao.TagDto;
 import com.example.BookShop.entity.Author;
 import com.example.BookShop.entity.Book;
+import com.example.BookShop.entity.book.tag.Tag;
 import com.example.BookShop.service.AuthorService;
 import com.example.BookShop.service.BookService;
-import com.example.BookShop.utils.Converter;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import liquibase.pro.packaged.S;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
-import java.sql.Date;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-
-import static java.lang.Integer.parseInt;
 
 @Api(description = "authors data")
 @Controller
@@ -59,8 +54,6 @@ public class MainPageController {
         return new Author();
     }
 
-
-
     @ModelAttribute("recommendedBooks")
     public List<Book> recommendedBooks() {
         return bookService.getPageOfRecommendedBooks(0, 10).getContent();
@@ -76,6 +69,10 @@ public class MainPageController {
         return new TagDto();
     }
 
+    @ModelAttribute("tags")
+    public List<Tag> tags() {
+        return bookService.getTags();
+    }
 
     @ModelAttribute("searchResults")
     public List<Book> searchResults() {
@@ -99,8 +96,8 @@ public class MainPageController {
 
     @GetMapping
     public String mainPage(Model model) {
-        logger.info("Db data: " + authorService.getAlphabetAndAuthors());
         model.addAttribute("recommendedBooks");
+        model.addAttribute("tags");
         return "index";
     }
 
@@ -125,7 +122,7 @@ public class MainPageController {
                                   @PathVariable(value = "id") Integer id, Model model) {
 //      model.addAttribute()
         model.addAttribute("author", author);
-        model.addAttribute("authorBooks", bookService.getBooksByAuthor(0,20,id).getContent());
+        model.addAttribute("authorBooks", bookService.getBooksByAuthor(0,5,id).getContent());
         return "books/author";
     }
 
